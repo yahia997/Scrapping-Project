@@ -27,6 +27,9 @@ collection = db['Hotel'] # access collection in a database
 with open('cleaned_hotels.json', 'r',encoding='utf-8') as file:
   data = json.load(file)
 
+# drop old data
+collection.delete_many({})
+
 # save to mongodb atlas
 collection.insert_many(data)
 

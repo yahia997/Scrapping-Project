@@ -106,14 +106,14 @@ def preprocess_hotel(hotel):
     return hotel
 
 cleaned_data = []
-seen_urls = set()
+seen_hotels = set()
 
 # go through each object in the list
 for hotel in data:
     # check duplicates
-    if hotel["url"] in seen_urls:
+    if hotel["title"] in seen_hotels:
         continue
-    seen_urls.add(hotel["url"])
+    seen_hotels.add(hotel["title"])
     
     cleaned_hotel = preprocess_hotel(hotel)
     cleaned_data.append(cleaned_hotel)
