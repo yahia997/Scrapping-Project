@@ -1,4 +1,12 @@
-.env
-Project Idea.docx
-test.ipynb
-code copy.ipynb
+*
+
+!cleaned_hotels.json
+!.gitignore
+!data.json
+!Project Idea.pdf
+!Scrapping.ipynb
+!Visualization.ipynb
+!Preprocessing.py
+!Streamlit/
+!Project Report.pdf
+!mongo.py
