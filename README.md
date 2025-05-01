@@ -1,22 +1,23 @@
 # 🕸️ Scrapping-Project
 This project is a comprehensive web scraping and data analysis pipeline focused on extracting, processing, and visualizing hotel data. It encompasses data collection, cleaning, storage, and interactive visualization components.
 
-### Get Started
+### 🚀 Get Started
 Ensure that you have required libraries:
 ```
+pip install requests beautifulsoup4 pandas numpy matplotlib seaborn streamlit pymongo
 git clone https://github.com/yahia997/Scrapping-Project.git
 cd Scrapping-Project/Streamlit
 streamlit run web.py
 ```
 
-### Pipeline 
+### ➡️ Pipeline 
 We followed ETL pipeline as developers do in real world projects. So that we make 
 Load MongoDB first then we extract from it using MQL queries and make 
 visualizations and analytics on it. If data is Loaded at the final stage then the data is 
 for achieving.
 ![Pipeline](image.png)
 
-#### Data Extraction (Scrapping) [Yahya Mahmoud] 
+#### 🕷️ Data Extraction (Scrapping) [Yahya Mahmoud] 
 I used selenium with beautifulSoup to scrap the website. Selenium to be able to 
 interact with the page such as click on buttons and to imitate user behavior to as a 
 bot to get the “price” Field (can not be extracted with bs4).
@@ -132,7 +133,7 @@ Example of objects we get:
   }
 ```
 
-#### Data Cleaning, preprocessing and Regular expressions 
+#### 🔧 Data Cleaning, preprocessing and Regular expressions 
 As our data in JSON format we will loop through each hotel and 
 preprocess it rather than using pandas dataframe. We have nested object 
 that we can not store and process in pandas such as comments list. 
@@ -191,7 +192,7 @@ with None.
 - Handle extra white spaces. 
 We strip fields such as description, country. 
 
-#### Load to MongoDB Atlas 
+#### 🍃 Load to MongoDB Atlas 
 We deployed before analysis to make any person capture data from any 
 where and make his analysis (As in real projects). 
 We make that also to benefit from MongoDB Aggregation pipeline which 
@@ -204,7 +205,7 @@ I also put 'revision' filed to each object to mention the schema version
 (That is a design pattern in MongoDB that is suitable for data analysis to 
 access data based on the schema version).
 
-#### Data analysis and visualization
+#### 📊 Data analysis and visualization
 You can see it in 'visualization.ipynb' or you can write in terminal:
 ```
 git clone https://github.com/yahia997/Scrapping-Project.git
