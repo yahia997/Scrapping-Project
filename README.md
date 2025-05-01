@@ -212,3 +212,5 @@ git clone https://github.com/yahia997/Scrapping-Project.git
 cd Scrapping-Project/Streamlit
 streamlit run web.py
 ```
+
+You can find more info in 'Project Report.pdf'
