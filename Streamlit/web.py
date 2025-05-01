@@ -8,8 +8,9 @@ page_3 = st.Page("page_3.py", title="3.Facility Count", icon="🏨")
 page_4 = st.Page('page_4.py', title='4.Facility average rating', icon='🏨')
 page_5 = st.Page('page_5.py', title='5.Top 10 countries by num of hotels', icon='🏨')
 page_6 = st.Page('page_6.py', title='6.Hotel price vs Rating', icon='🏨')
+page_7 = st.Page('page_7.py', title='7.Geographic Heatmap', icon='🏨')
 
-pg = st.navigation([Main_page,page_1, page_2, page_3, page_4, page_5, page_6])
+pg = st.navigation([Main_page,page_1, page_2, page_3, page_4, page_5, page_6, page_7])
 
 
 

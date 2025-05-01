@@ -5,10 +5,11 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import plotly.express as px
 import pandas as pd
+import os
 
 load_dotenv()
 
-uri = "mongodb+srv://read:GyXXtAnGawVA68YX@cluster0.nsusqff.mongodb.net/?appName=Cluster0"
+uri = os.getenv('MONGODB_CONNECTION_STRING')
 client = MongoClient(uri, server_api=ServerApi('1'))
 
 db = client['Hotel'] # access database
