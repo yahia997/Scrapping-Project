@@ -1,30 +1,9 @@
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
-from dotenv import load_dotenv
-import os
-import json
-from bson.objectid import ObjectId
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
-from wordcloud import WordCloud, STOPWORDS
-from sklearn.preprocessing import MinMaxScaler
-import plotly.graph_objects as go
-import nltk
-from nltk.corpus import stopwords
 import streamlit as st
+from main_page import collection
+import numpy as np
 
-
-load_dotenv()
-
-uri = os.getenv('MONGODB_CONNECTION_STRING')
-client = MongoClient(uri, server_api=ServerApi('1'))
-
-db = client['Hotel'] # access database
-collection = db['Hotel'] # access collection in a database
-
-data3 = list(collection.aggregate([
+data3 = collection.aggregate([
   {'$unwind': '$facilities'}, # deconstruct array elements
   {
     '$group': {
@@ -44,7 +23,7 @@ data3 = list(collection.aggregate([
       }
     }
   }
-]))
+]).to_list()
 
 tops = sorted(data3, key=lambda x: x['count'], reverse=True)[:10]
 
@@ -58,38 +37,16 @@ width = 0.35
 col1, col2=st.columns([3,1])
 
 with col1:
-    with st.container():
-        fig, ax = plt.subplots(figsize=(8, 6))
-        bars1 = ax.bar(x - width/2, counts, width, label='Count', color='skyblue')
-        bars2 = ax.bar(x + width/2, rating, width, label='Avg Rating', color='salmon')
-        # Labels and formatting
-        ax.set_ylabel('Value')
-        ax.set_title('Facility Count and Average Rating')
-        ax.set_xticks(x)
-        ax.set_xticklabels(facilities, rotation=25, ha='right')
-        ax.legend()
-        ax.grid(True, linestyle='--', alpha=0.5)
-        plt.tight_layout()
-        plt.show()
-        st.pyplot(plt.gcf())
-
-with col2:
-    st.markdown('''
-**Insights derived from the bar chart**
-
-**Most common facilites:**
-                                        
--Free parking
-
--Free wifi
-
--Family rooms                                        
-
-**Least common facilites:**
-                                        
--Resturant
-
--Beach front
-
--Room service                                                                                                                            
-''')    
+  fig, ax = plt.subplots(figsize=(8, 6))
+  bars1 = ax.bar(x - width/2, counts, width, label='Count', color='skyblue')
+  bars2 = ax.bar(x + width/2, rating, width, label='Avg Rating', color='salmon')
+  # Labels and formatting
+  ax.set_ylabel('Value')
+  ax.set_title('Facility Count and Average Rating')
+  ax.set_xticks(x)
+  ax.set_xticklabels(facilities, rotation=25, ha='right')
+  ax.legend()
+  ax.grid(True, linestyle='--', alpha=0.5)
+  plt.tight_layout()
+  plt.show()
+  st.pyplot(plt.gcf())

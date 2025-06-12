@@ -23,20 +23,17 @@ db = client['Hotel'] # access database
 collection = db['Hotel'] # access collection in a database
 
 ######################################### for first time only #######################
-# read cleaned json file
-with open('cleaned_hotels.json', 'r',encoding='utf-8') as file:
-  data = json.load(file)
+def load(data):
+  # save to mongodb atlas
+  collection.insert_many(data)
 
-# save to mongodb atlas
-collection.insert_many(data)
-
-# add revision for schema versioning
-revision = 1
-collection.update_many({}, {
-  '$set': {
-    'revision': revision
-  }
-})
+  # add revision for schema versioning
+  revision = 1
+  collection.update_many({}, {
+    '$set': {
+      'revision': revision
+    }
+  })
 ######################################### ########################## #######################
 
 

@@ -1,5 +1,5 @@
 # this code is written by Hamed
-import json
+from datetime import datetime
 import re
 
 # cities list
@@ -17,10 +17,6 @@ cities = [
   'Marsa Alam',
   'Ismailia',
 ]
-
-# read uncleaned json file
-with open("data.json", 'r', encoding='utf-8') as f:
-    data = json.load(f)
 
 # function to clean each object
 def preprocess_hotel(hotel):
@@ -102,24 +98,25 @@ def preprocess_hotel(hotel):
         price_val = re.findall(r"[0-9,]+", price)
         price_comma_removed = re.sub(r",", "", price_val[0])
         hotel["price"] = float(price_comma_removed)
+    
+    hotel['date'] = datetime.now()
 
     return hotel
 
-cleaned_data = []
-seen_urls = set()
 
-# go through each object in the list
-for hotel in data:
-    # check duplicates
-    if hotel["url"] in seen_urls:
-        continue
-    seen_urls.add(hotel["url"])
+# function to clean
+def clean(data):
+    cleaned_data = []
+    seen_hotels = set()
     
-    cleaned_hotel = preprocess_hotel(hotel)
-    cleaned_data.append(cleaned_hotel)
+    # go through each object in the list
+    for hotel in data:
+        # check duplicates
+        if hotel["title"] in seen_hotels:
+            continue
+        seen_hotels.add(hotel["title"])
+        
+        cleaned_hotel = preprocess_hotel(hotel)
+        cleaned_data.append(cleaned_hotel)
 
-# save to new cleaned json file
-with open('cleaned_hotels.json', 'w', encoding='utf-8') as f:
-    json.dump(cleaned_data, f, ensure_ascii=False, indent=4)
-
-print("cleaned_hotels.json")
+    return cleaned_data
